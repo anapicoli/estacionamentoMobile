@@ -1,0 +1,95 @@
+import styled from "styled-components/native";
+import {Colors} from "../theme/theme";
+
+export const Container = styled.ScrollView`
+  flex: 1;
+  background-color: ${Colors.branco};
+`;
+
+export const Header = styled.View`
+  width: 100%;
+  height: 90px;
+  background-color: ${Colors.amareloVibrante};
+  justify-content: center;
+  padding: 20px;
+`;
+
+export const LoginForm = styled.View`
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 209px;
+`;
+
+export const Form = styled.View`
+  width: 370px;
+  align-self: center;
+  padding: 25px;
+  background-color: ${Colors.amareloVibrante};
+  border-radius: 20px;
+`;
+
+export const TitleTab = styled.Text`
+  font-family: "BebasNeue-Regular";
+  font-size: 30px;
+  padding: 10px 60px;
+  text-align: center;
+  width: 174px;
+  height: 55px;
+  border-radius: 20px;
+  background-color: ${Colors.amareloVibrante};
+  margin-bottom: -10px;
+  elevation: 30;
+  z-index: 2;
+`;
+
+export const Label = styled.Text`
+  font-family: "Inter-Regular";
+  font-size: 12px;
+  margin-top: 10px;
+`;
+
+export const Input = styled.TextInput`
+  width: 324px;
+  height: 45px;
+  background-color: ${Colors.branco};
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 5px;
+  elevation: 2px;
+`;
+
+export const Button = styled.TouchableOpacity`
+  width: 96px;
+  height: 40px;
+  background-color: ${Colors.marrom};
+  border-radius: 100px;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ButtonText = styled.Text`
+  font-family: "Nunito-SemiBold";
+  font-size: 15px;
+  color: ${Colors.branco};
+`;
+
+export const Forgot = styled.View`
+  flex-direction: row;
+  justify-content: ${(p) => (p.rowRight ? "flex-end" : "center")};
+  margin-top: 5px;
+`;
+
+export const Row = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 25px;
+  gap: 5px;
+`;
+
+export const LinkText = styled.Text`
+  font-family: "Inter-Regular";
+  font-size: 10px;
+  color: ${Colors.marrom};
+  text-decoration: underline;
+`;
