@@ -5,10 +5,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 
-import Login from "./src/login";
-import Cadastro from "./src/cadastro";
-import ListaVeiculos from "./src/listaveiculos";
-import RegistrarEntrada from "./src/registrarentrada";
+import Login from "./src/login/index.jsx";
+import Cadastro from "./src/cadastro/index.jsx";
+import ListaVeiculos from "./src/listaveiculos/index.jsx";
+import RegistrarEntrada from "./src/registrarentrada/index.jsx";
+import RegistrarSaida from "./src/registrarsaida/index.jsx";
+// import Splash from "./src/splashscreen";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -57,12 +59,12 @@ export default function App() {
   return (
     <NavigationContainer onReady={onLayoutRootView}>
       <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
-        {/* <Stack.Screen name="Splash" component={SplashScreen} /> */}
+        {/* <Stack.Screen name="Splash" component={Splash} /> */}
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Cadastro" component={Cadastro} />
         <Stack.Screen name="ListaVeiculos" component={ListaVeiculos} />
         <Stack.Screen name="RegistrarEntrada" component={RegistrarEntrada} />
-        {/* <Stack.Screen name="RegistrarSaida" component={RegistrarSaida} /> */}
+        <Stack.Screen name="RegistrarSaida" component={RegistrarSaida} />
       </Stack.Navigator>
     </NavigationContainer>
   );

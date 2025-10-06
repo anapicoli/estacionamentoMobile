@@ -11,7 +11,7 @@ export const Header = styled.View`
   height: 90px;
   background-color: ${Colors.amareloVibrante};
   justify-content: center;
-  padding-left: 20px;
+  padding: 20px;
 `;
 
 export const Logo = styled.Image`
@@ -19,24 +19,33 @@ export const Logo = styled.Image`
   height: 89px;
 `;
 
+export const LoginForm = styled.View`
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 209px;
+`;
+
 export const Form = styled.View`
   width: 370px;
   align-self: center;
-  margin-top: 209px;
   padding: 25px;
   background-color: ${Colors.amareloVibrante};
   border-radius: 20px;
-  shadow-color: #000;
-  shadow-offset: 0px 4px;
-  shadow-opacity: 0.25;
-  shadow-radius: 4px;
 `;
 
 export const TitleTab = styled.Text`
   font-family: "BebasNeue-Regular";
   font-size: 30px;
-  align-self: center;
-  margin-bottom: 20px;
+  padding: 10px 60px;
+  text-align: center;
+  width: 174px;
+  height: 55px;
+  border-radius: 20px;
+  background-color: ${Colors.amareloVibrante};
+  margin-bottom: -10px;
+  elevation: 30;
+  z-index: 2;
 `;
 
 export const Label = styled.Text`
@@ -49,13 +58,9 @@ export const Input = styled.TextInput`
   width: 324px;
   height: 45px;
   background-color: ${Colors.branco};
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 10px;
   margin-top: 5px;
-  shadow-color: #000;
-  shadow-offset: 4px 3px;
-  shadow-opacity: 0.2;
-  shadow-radius: 5px;
   elevation: 2;
 `;
 
@@ -63,8 +68,7 @@ export const Button = styled.TouchableOpacity`
   width: 96px;
   height: 40px;
   background-color: ${Colors.marrom};
-  border-radius: 10px;
-  margin-top: 25px;
+  border-radius: 100px;
   justify-content: center;
   align-items: center;
 `;
@@ -75,10 +79,17 @@ export const ButtonText = styled.Text`
   color: ${Colors.branco};
 `;
 
-export const Row = styled.View`
+export const Forgot = styled.View`
   flex-direction: row;
   justify-content: ${(p) => (p.rowRight ? "flex-end" : "center")};
   margin-top: 5px;
+`;
+
+export const Row = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 25px;
+  gap: 5px;
 `;
 
 export const LinkText = styled.Text`
@@ -86,5 +97,4 @@ export const LinkText = styled.Text`
   font-size: 10px;
   color: ${Colors.marrom};
   text-decoration: underline;
-
 `;

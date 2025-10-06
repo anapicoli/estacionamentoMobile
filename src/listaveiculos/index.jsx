@@ -1,28 +1,28 @@
 import React from "react";
-import { TouchableOpacity, FlatList, Text } from "react-native";
-import { Container, Header, Logo, Title, SearchContainer, SearchInput, CardsContainer, Card, CardRow, ButtonRow,PlateText, DateText, RegisterButton, RegisterButtonText } from "./style";
+import {FlatList} from "react-native";
+import { Container, Header, Logo, Title, ListTitle, SearchInput, CardsContainer, Card, CardRow, ButtonRow,PlateText, DateText, RegisterButton, RegisterButtonText, RegisterEntryText } from "./style";
 
 const sampleData = [
-  { id: "1", plate: "HSU8926", date: "24/08/2025", time: "18:59" },
-  { id: "2", plate: "LWD9926", date: "26/08/2025", time: "10:36" },
-  { id: "3", plate: "KFC3965", date: "27/08/2025", time: "08:05" },
-  { id: "4", plate: "MUO8916", date: "28/08/2025", time: "02:42" },
-  { id: "5", plate: "NDP2985", date: "30/08/2025", time: "01:02" },
-  { id: "6", plate: "NEM9473", date: "01/09/2025", time: "01:15" },
+  { id: "1", plate: "HSU8926", entrydate: "24/08/2025", entrytime: "18:59" },
+  { id: "2", plate: "LWD9926", entrydate: "26/08/2025", entrytime: "10:36" },
+  { id: "3", plate: "KFC3965", entrydate: "27/08/2025", entrytime: "08:05" },
+  { id: "4", plate: "MUO8916", entrydate: "28/08/2025", entrytime: "02:42" },
+  { id: "5", plate: "NDP2985", entrydate: "30/08/2025", entrytime: "01:02" },
+  { id: "6", plate: "NEM9473", entrydate: "01/09/2025", entrytime: "01:15" },
 ];
+
 
 export default function ListaVeiculos({ navigation }) {
   return (
     <Container>
       <Header>
-        <Logo source={require("../../assets/images/logo.svg")} resizeMode="contain" />
+        <Logo source={require("../../assets/images/logo.png")} resizeMode="contain" />
       </Header>
 
-      <Title>VEÍCULOS ATIVOS</Title>
-
-      <SearchContainer>
+      <ListTitle>
+        <Title>VEÍCULOS ATIVOS</Title>
         <SearchInput placeholder="buscar placa" placeholderTextColor="#8C8C8C" />
-      </SearchContainer>
+      </ListTitle>
 
       <CardsContainer>
         <FlatList
@@ -33,11 +33,11 @@ export default function ListaVeiculos({ navigation }) {
           renderItem={({ item }) => (
             <Card>
                 <CardRow>
-                    <DateText>{item.date} · {item.time}</DateText>
+                    <DateText>{item.entrydate} · {item.entrytime}</DateText>
                 </CardRow>
                 <ButtonRow>
                     <PlateText>{item.plate}</PlateText>
-                    <RegisterButton onPress={() => navigation.navigate("RegistrarSaida", { plate: item.plate })}>
+                    <RegisterButton onPress={() => navigation.navigate("RegistrarSaida", { plate: item.plate, entrytime: item.entrytime, entrydate: item.entrydate})}>
                         <RegisterButtonText>registrar saída</RegisterButtonText>
                     </RegisterButton>
                 </ButtonRow>
@@ -47,7 +47,7 @@ export default function ListaVeiculos({ navigation }) {
       </CardsContainer>
 
       <RegisterButton style={{ alignSelf: "center", marginTop:400, width: 130, height: 40 }} onPress={() => navigation.navigate("RegistrarEntrada")}>
-        <RegisterButtonText>registrar entrada</RegisterButtonText>
+        <RegisterEntryText>registrar entrada</RegisterEntryText>
       </RegisterButton>
     </Container>
   );

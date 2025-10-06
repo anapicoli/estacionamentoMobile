@@ -19,24 +19,33 @@ export const Logo = styled.Image`
   height: 89px;
 `;
 
+export const CadastroForm = styled.View`
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 151px;
+`;
+
 export const Form = styled.View`
   width: 370px;
   align-self: center;
-  margin-top: 150px;
   padding: 25px;
   background-color: ${Colors.amareloVibrante};
   border-radius: 20px;
-  shadow-color: #000;
-  shadow-offset: 0px 4px;
-  shadow-opacity: 0.25;
-  shadow-radius: 4px;
 `;
 
 export const TitleTab = styled.Text`
   font-family: "BebasNeue-Regular";
   font-size: 30px;
-  align-self: center;
-  margin-bottom: 10px;
+  padding: 10px 60px;
+  text-align: center;
+  width: 215px;
+  height: 55px;
+  border-radius: 20px;
+  background-color: ${Colors.amareloVibrante};
+  margin-bottom: -10px;
+  elevation: 30;
+  z-index: 2;
 `;
 
 export const Label = styled.Text`
@@ -52,10 +61,6 @@ export const Input = styled.TextInput`
   border-radius: 8px;
   padding: 10px;
   margin-top: 5px;
-  shadow-color: #000;
-  shadow-offset: 4px 3px;
-  shadow-opacity: 0.2;
-  shadow-radius: 5px;
   elevation: 2;
 `;
 
