@@ -5,12 +5,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 
-import Login from "./src/login/index.jsx";
-import Cadastro from "./src/cadastro/index.jsx";
-import ListaVeiculos from "./src/listaveiculos/index.jsx";
-import RegistrarEntrada from "./src/registrarentrada/index.jsx";
-import RegistrarSaida from "./src/registrarsaida/index.jsx";
-// import Splash from "./src/splashscreen";
+import Login from "./src/login";
+import Cadastro from "./src/cadastro";
+import ListaVeiculos from "./src/listaveiculos";
+import RegistrarEntrada from "./src/registrarentrada";
+import RegistrarSaida from "./src/registrarsaida";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -23,14 +22,15 @@ export default function App() {
     async function prepare() {
       try {
         await Font.loadAsync({
-      "BebasNeue-Regular": require("./assets/fonts/Bebas_Neue/BebasNeue-Regular.ttf"),
-      "Inter-Regular": require("./assets/fonts/Inter/static/Inter_18pt-Regular.ttf"),
-      "Inter-Medium": require("./assets/fonts/Inter/static/Inter_18pt-Medium.ttf"),
-      "Nunito-SemiBold": require("./assets/fonts/Nunito/static/Nunito-SemiBold.ttf"),
-      "Nunito-Regular": require("./assets/fonts/Nunito/static/Nunito-Regular.ttf"),
-  });
+          "BebasNeue-Regular": require("./assets/fonts/Bebas_Neue/BebasNeue-Regular.ttf"),
+          "Inter-Regular": require("./assets/fonts/Inter/static/Inter_18pt-Regular.ttf"),
+          "Inter-Medium": require("./assets/fonts/Inter/static/Inter_18pt-Medium.ttf"),
+          "Nunito-SemiBold": require("./assets/fonts/Nunito/static/Nunito-SemiBold.ttf"),
+          "Nunito-Regular": require("./assets/fonts/Nunito/static/Nunito-Regular.ttf"),
+        });
+
       } catch (e) {
-        console.warn(e);
+        console.warn("Erro ao carregar recursos:", e);
       } finally {
         setAppIsReady(true);
       }
@@ -47,19 +47,18 @@ export default function App() {
 
   if (!appIsReady) {
     return (
-      <View
-        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        onLayout={onLayoutRootView}
-      >
-        <ActivityIndicator size="large" />
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#000000" />
       </View>
     );
   }
 
   return (
     <NavigationContainer onReady={onLayoutRootView}>
-      <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
-        {/* <Stack.Screen name="Splash" component={Splash} /> */}
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{ headerShown: false }}
+      >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Cadastro" component={Cadastro} />
         <Stack.Screen name="ListaVeiculos" component={ListaVeiculos} />

@@ -1,60 +1,76 @@
 import React, { useEffect, useState } from "react";
-import { TouchableOpacity } from "react-native";
-import { Container, Header, Logo, BackContainer, BackImage, BackText, ExitForm, Form, TitleTab, Label, Input, Button, ButtonText} from "./style";
+import { Alert, TouchableOpacity } from "react-native";
+import api from "../services/api";
+import { Container, Header, Logo, BackContainer, BackImage, BackText, ExitForm, Form, TitleTab, Label, Input, Button, ButtonText } from "./style";
 
 export default function RegistrarSaida({ route, navigation }) {
-  const { plate, entrytime, entrydate } = route.params || {};
+  const { id } = route.params || {};
 
+  const [plate, setPlate] = useState("");
+  const [entrytime, setEntryTime] = useState("");
+  const [entrydate, setEntryDate] = useState("");
   const [exitTime, setExitTime] = useState("");
   const [exitDate, setExitDate] = useState("");
   const [valor, setValor] = useState("");
+  const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-    const atualizarSaida = () => {
-      const now = new Date();
+  useEffect(() => {
+    async function fetchVehicle() {
+      try {
+        const response = await api.get(`/api/veiculos/id/${id}`);
+        const veiculo = response.data;
 
-      const horaSaida = now.toLocaleTimeString("pt-BR", {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-
-      const dataSaida = now.toLocaleDateString("pt-BR", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-      });
-
-      setExitTime(horaSaida);
-      setExitDate(dataSaida);
-
-      if (entrydate && entrytime) {
-        const [dia, mes, ano] = entrydate.split("/");
-        const [hora, minuto] = entrytime.split(":");
-        const entrada = new Date(ano, mes - 1, dia, hora, minuto);
-
-        const diffMs = now - entrada;
-        const diffHoras = diffMs / 1000 / 60 / 60;
-
-        const valorCalculado = (Math.max(diffHoras, 1) * 5).toFixed(2);
-        setValor(valorCalculado);
+        setPlate(veiculo.placa || "");
+        setEntryTime(veiculo.horaEntrada || "");
+        setEntryDate(veiculo.dataEntrada || "");
+        setExitTime(veiculo.horaSaida || "");
+        setExitDate(veiculo.dataSaida || "");
+        setValor(veiculo.valorPago ? veiculo.valorPago.toFixed(2) : "");
+      } catch (error) {
+        console.error("Erro ao buscar veículo:", error?.response?.data || error.message);
+        Alert.alert("Erro", "Não foi possível carregar os dados do veículo.");
       }
-    };
+    }
 
-    atualizarSaida();
+    if (id) {
+      fetchVehicle();
+    }
+  }, [id]);
 
-    const intervalo = setInterval(atualizarSaida, 1000);
+  async function handleSaida() {
+    setLoading(true);
+    try {
+      const payload = {
+        id,
+      };
 
-    return () => clearInterval(intervalo);
-  }, [entrytime, entrydate]);
+      const response = await api.post("/api/veiculos/saida", payload);
+
+      const valorFinal = response.data?.valorPago?.toFixed(2) || valor;
+
+      Alert.alert("Sucesso", `Saída registrada. Total a pagar: R$ ${valorFinal}`);
+      navigation.navigate("ListaVeiculos");
+    } catch (error) {
+      console.error("Erro registrar saída:", error?.response?.data || error.message);
+      const msg =
+        error?.response?.data?.message || "Não foi possível registrar a saída.";
+      Alert.alert("Erro", msg);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <Container>
       <Header>
-        <Logo source={require("../../assets/images/logo.png")} resizeMode="contain" />
+        <Logo
+          source={require("../../assets/images/logo.png")}
+          resizeMode="contain"
+        />
       </Header>
 
       <BackContainer>
-        <BackImage source={require("../../assets/images/voltar.png")}/>
+        <BackImage source={require("../../assets/images/voltar.png")} />
         <TouchableOpacity onPress={() => navigation.navigate("ListaVeiculos")}>
           <BackText>Voltar ao início</BackText>
         </TouchableOpacity>
@@ -64,25 +80,25 @@ export default function RegistrarSaida({ route, navigation }) {
         <TitleTab>SAÍDA</TitleTab>
         <Form>
           <Label>Placa:</Label>
-          <Input value={plate} editable={false} />
+          <Input value={plate ?? ""} editable={false} />
 
           <Label>Horário de entrada:</Label>
-          <Input value={entrytime} editable={false} />
+          <Input value={entrytime ?? ""} editable={false} />
 
           <Label>Data de entrada:</Label>
-          <Input value={entrydate} editable={false} />
+          <Input value={entrydate ?? ""} editable={false} />
 
           <Label>Horário de saída:</Label>
-          <Input value={exitTime} editable={false} />
+          <Input value={exitTime ?? ""} editable={false} />
 
           <Label>Data de saída:</Label>
-          <Input value={exitDate} editable={false} />
+          <Input value={exitDate ?? ""} editable={false} />
 
           <Label>Valor a ser pago:</Label>
-          <Input value={`R$ ${valor}`} editable={false} />
+          <Input value={valor ? `R$ ${valor}` : ""} editable={false} />
 
-          <Button onPress={() => navigation.navigate("ListaVeiculos")}>
-            <ButtonText>Confirmar</ButtonText>
+          <Button onPress={handleSaida} disabled={loading}>
+            <ButtonText>{loading ? "Confirmando..." : "Confirmar"}</ButtonText>
           </Button>
         </Form>
       </ExitForm>
