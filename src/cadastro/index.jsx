@@ -1,8 +1,8 @@
 // src/cadastro/index.jsx
 import React, { useState } from "react";
-import { Alert } from "react-native";
+import { Alert, TouchableOpacity } from "react-native";
 import api from "../services/api";
-import { Container, Header, Logo, CadastroForm, Form, TitleTab, Label, Input, Button, ButtonText } from "./style";
+import { Container, Header, Logo, CadastroForm, Form, TitleTab, Label, Input, Button, ButtonText, BackContainer, BackImage, BackText } from "./style";
 
 export default function Cadastro({ navigation }) {
   const [nome, setNome] = useState("");
@@ -43,6 +43,13 @@ export default function Cadastro({ navigation }) {
       <Header>
         <Logo source={require("../../assets/images/logo.png")} resizeMode="contain" />
       </Header>
+
+      <BackContainer>
+        <BackImage source={require("../../assets/images/voltar.png")} />
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+          <BackText>Voltar ao início</BackText>
+         </TouchableOpacity>
+      </BackContainer>
 
       <CadastroForm>
         <TitleTab>CADASTRO</TitleTab>

@@ -12,7 +12,12 @@ api.interceptors.request.use(
   async (config) => {
     try {
       const token = await AsyncStorage.getItem("token");
-      if (token) {
+
+      const isAuthRoute =
+      config.url?.includes("/auth/login") ||
+      config.url?.includes("/auth/register");
+
+      if (token && !isAuthRoute) {
         config.headers.Authorization = `Bearer ${token}`;
       }
     } catch (e) {

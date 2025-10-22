@@ -73,9 +73,6 @@ export default function ListaVeiculos({ navigation }) {
                     onPress={() =>
                       navigation.navigate("RegistrarSaida", {
                         plate: placa,
-                        entrytime: entrytime,
-                        entrydate: entrydate,
-                        id: item.id ?? item.codigo ?? item._id,
                       })
                     }
                   >

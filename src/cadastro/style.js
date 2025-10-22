@@ -19,6 +19,25 @@ export const Logo = styled.Image`
   height: 89px;
 `;
 
+export const BackContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 15px;
+  margin-right: 15px;
+  gap: 5px;
+`;
+
+export const BackImage = styled.Image`
+  width: 15px;
+  height: 15px;
+`;
+
+export const BackText = styled.Text`
+  font-family: "Inter-Regular";
+  font-size: 12px;
+`;
+
 export const CadastroForm = styled.View`
   justify-content: center;
   flex-direction: column;

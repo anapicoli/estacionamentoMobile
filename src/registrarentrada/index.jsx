@@ -12,8 +12,13 @@ export default function RegistrarEntrada({ navigation }) {
 
   React.useEffect(() => {
     const agora = new Date();
-    const horaAtual = agora.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+
+    const offset = agora.getTimezoneOffset();
+    const ajustado = new Date(agora.getTime() - offset * 60000);
+
+    const horaAtual = ajustado.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
     const dataAtual = agora.toLocaleDateString("pt-BR");
+
     setHora(horaAtual);
     setData(dataAtual);
   }, []);
@@ -27,8 +32,6 @@ export default function RegistrarEntrada({ navigation }) {
     try {
       await api.post("/api/veiculos/entrada", {
         placa: placa.trim(),
-        dataEntrada: data,
-        horaEntrada: hora,
       });
 
       Alert.alert("Sucesso", "Entrada registrada com sucesso!");
