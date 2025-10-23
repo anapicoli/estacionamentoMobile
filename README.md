@@ -4,28 +4,28 @@
   O sistema permite registrar novas entradas e saídas, visualizar veículos ativos e calcular automaticamente o valor a ser pago de acordo com o tempo de permanência.
 
 # Funcionalidades
-  • Autenticação
+  ## Autenticação
     ⋄ Login e Cadastro de usuários.
     ⋄ Validação via API (/auth/login e /auth/register).
     ⋄ Sessão segura com verificação de usuário logado (/auth/me).
   
-  • Veículos
+  ## Veículos
     ⋄ Registrar entrada: insere uma nova entrada com a placa informada e data/hora automática do sistema.
     ⋄ Registrar saída: busca as informações do veículo e calcula automaticamente o valor a ser pago, enviando apenas a placa para o backend.
     ⋄ Listar veículos ativos: exibe todos os veículos atualmente estacionados.
   
-  • Cálculo automático de valor
+  ## Cálculo automático de valor
     ⋄ O valor da saída é calculado pelo backend com base no tempo de permanência.
   
 # Tecnologias Utilizadas
-  • Backend
+  ## Backend
     ⋄ Java 17
     ⋄ Spring Boot
     ⋄ JPA / Hibernate
     ⋄ MySQL
     ⋄ Spring Security (JWT)
   
-  • Frontend
+  ## Frontend
     ⋄ React Native (Expo)
     ⋄ React Navigation
     ⋄ Styled Components
@@ -82,17 +82,19 @@
   • Integração completa com a API de estacionamento
 
 # Como executar o projeto
-  • Pré Requisitos
+  ## Pré Requisitos
     ⋄ Node.js instalado
     ⋄ Expo CLI (npm install -g expo-cli)
     ⋄ Backend (Spring Boot) em execução
 
-  • Excutar o app mobile
+  ## Excutar o app mobile
     ⋄ Utilizando Git Bash:
       # Instalar dependências:
         npm install
       # Rodar o app:
         npx expo start
 
-## Projeto Desenvolvido por
+
+
+### Projeto Desenvolvido por
   Ana Picoli
