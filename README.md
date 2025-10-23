@@ -94,5 +94,5 @@
       # Rodar o app:
         npx expo start
 
-# Projeto Desenvolvido por
+## Projeto Desenvolvido por
   Ana Picoli
